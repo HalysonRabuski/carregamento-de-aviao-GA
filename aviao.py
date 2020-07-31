@@ -36,6 +36,7 @@ def perform_fitness(C1D,C1C,C1T,C2D,C2C,C2T,C3D,C3C,C3T,C4D,C4C,C4T):
     C4D = np.round(C4D)
     C4C = np.round(C4C)
     C4T = np.round(C4T)
+    total = C1D+C1C+C1T + C2D+C2C+C2T +C3D+C3C+C3T + C4D+C4C+C4T
 
     fit = float((0.31*C1D + 0.31*C1C + 0.31*C1T + 0.38*C2D +  0.38*C2C + 0.38*C2T + 0.35*C3D + 0.35*C3C + 0.35*C3T + 0.285*C4D + 0.285*C4C + 0.285*C4T) / 12151.56)
     
@@ -61,9 +62,9 @@ def perform_fitness(C1D,C1C,C1T,C2D,C2C,C2T,C3D,C3C,C3T,C4D,C4C,C4T):
     h10 = np.maximum(0, float((C4D + C4C + C4T) - 12000)) / 923.0769
 
     #proporção
-    h11 = np.maximum(0, float((C1D + C2D + C3D + C4D) - 10000)) / 769.2307
-    h12 = np.maximum(0, float((C1C + C2C + C3C + C4C) - 16000)) / 1230.7692
-    h13 = np.maximum(0, float((C1T + C2T + C3T + C4T) - 8000)) / 615.3846
+    h11 = np.maximum(0, float(((C1D + C2D + C3D + C4D) / total) - 0.2941)) / 0.0226
+    h12 = np.maximum(0, float(((C1C + C2C + C3C + C4C) / total) - 0.4705)) / 0.0361
+    h13 = np.maximum(0, float(((C1T + C2T + C3T + C4T) / total) - 0.2352)) / 0.0180
 
 
 
@@ -92,13 +93,13 @@ def solution_evaluation(C1D,C1C,C1T,C2D,C2C,C2T,C3D,C3C,C3T,C4D,C4C,C4T):
 
     print("..:RESUMO DO CARREGAMENTO:..")
     print("Lucro Total", float(0.31*C1D + 0.31*C1C + 0.31*C1T + 0.38*C2D +  0.38*C2C + 0.38*C2T + 0.35*C3D + 0.35*C3C + 0.35*C3T + 0.285*C4D + 0.285*C4C + 0.285*C4T))
-    print("Volume dianteiro ocupado", float(0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D))
-    print("Volume central ocupado", float(0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C))
-    print("Volume traseiro ocupado", float(0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T))
-    print("Volume total ocupado", float(0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D + 0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C + 0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T))
-    print("Peso total da dianteira", float(C1D + C2D +C3D + C4D))
-    print("Peso total da central", float(C1C + C2C +C3C + C4C))
-    print("Peso total da traseira", float(C1T + C2T +C3T + C4T))
+    print("Volume dianteiro ocupado", (0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D))
+    print("Volume central ocupado", (0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C))
+    print("Volume traseiro ocupado", (0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T))
+    print("Volume total ocupado", (0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D + 0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C + 0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T))
+    print("Peso total da dianteira", (C1D + C2D +C3D + C4D))
+    print("Peso total da central", (C1C + C2C +C3C + C4C))
+    print("Peso total da traseira", (C1T + C2T +C3T + C4T))
     
     print("C1 DIANTEIRO",C1D)
     print("C1 CENTRAL",C1C)
@@ -153,7 +154,7 @@ def main():
                           num_imputs=12,
                           crossover_rae=1.0,
                           num_crossover_points=1,
-                          mutation_rate=0.05,
+                          mutation_rate=0.25,
                           num_elites=1,
                           num_selected=12,
                           tournament_size=12,
