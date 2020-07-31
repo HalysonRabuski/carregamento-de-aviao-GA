@@ -40,28 +40,34 @@ def perform_fitness(C1D,C1C,C1T,C2D,C2C,C2T,C3D,C3C,C3T,C4D,C4C,C4T):
     fit = float((0.31*C1D + 0.31*C1C + 0.31*C1T + 0.38*C2D +  0.38*C2C + 0.38*C2T + 0.35*C3D + 0.35*C3C + 0.35*C3T + 0.285*C4D + 0.285*C4C + 0.285*C4T) / 12151.56)
     
     ## volume dianteiro
-    h1 = np.maximum(0, float((0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D) - 6800)) / 680 
+    h1 = np.maximum(0, float((0.48*C1D + 0.65*C2D + 0.58*C3D + 0.39*C4D) - 6800)) / 523.0769
     ## peso dianteiro
-    h2 = np.maximum(0, float((C1D + C2D + C3D + C4D) - 10000)) / 1000
+    h2 = np.maximum(0, float((C1D + C2D + C3D + C4D) - 10000)) / 769.2307
 ## -------------------------------------------------------------------------------------- ##
     ## volume central
-    h3 = np.maximum(0, float((0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C) - 8700)) / 870
+    h3 = np.maximum(0, float((0.48*C1C + 0.65*C2C + 0.58*C3C + 0.39*C4C) - 8700)) / 669.2307
     ## peso central
-    h4 = np.maximum(0, float((C1C + C2C + C3C + C4C) - 16000)) / 1600
+    h4 = np.maximum(0, float((C1C + C2C + C3C + C4C) - 16000)) / 1230.7692
 ## -------------------------------------------------------------------------------------- ##
     ## volume traseiro
-    h5 = np.maximum(0, float((0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T) - 5300)) / 530 
+    h5 = np.maximum(0, float((0.48*C1T + 0.65*C2T + 0.58*C3T + 0.39*C4T) - 5300)) / 407.6923
     ## peso traseiro
-    h6 = np.maximum(0, float((C1T + C2T + C3T + C4T) - 8000)) / 800
+    h6 = np.maximum(0, float((C1T + C2T + C3T + C4T) - 8000)) / 615.3846
 
     #limite disponível de cada carga
-    h7 = np.maximum(0, float((C1D + C1C + C1T) - 18000)) / 1800
-    h8 = np.maximum(0, float((C2D + C2C + C2T) - 15000)) / 1500
-    h9 = np.maximum(0, float((C3D + C3C + C3T) - 23000)) / 2300
-    h10 = np.maximum(0, float((C4D + C4C + C4T) - 12000)) / 1200
+    h7 = np.maximum(0, float((C1D + C1C + C1T) - 18000)) / 1384.6153
+    h8 = np.maximum(0, float((C2D + C2C + C2T) - 15000)) / 1153.8461
+    h9 = np.maximum(0, float((C3D + C3C + C3T) - 23000)) / 1769.2307
+    h10 = np.maximum(0, float((C4D + C4C + C4T) - 12000)) / 923.0769
+
+    #proporção
+    h11 = np.maximum(0, float((C1D + C2D + C3D + C4D) - 10000)) / 769.2307
+    h12 = np.maximum(0, float((C1C + C2C + C3C + C4C) - 16000)) / 1230.7692
+    h13 = np.maximum(0, float((C1T + C2T + C3T + C4T) - 8000)) / 615.3846
 
 
-    fit = fit - (h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10) 
+
+    fit = fit - (h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13) 
 
     return fit
 
